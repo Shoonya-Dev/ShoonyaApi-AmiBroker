@@ -1,0 +1,26 @@
+#include <ShoonyaApi.afl>
+_SECTION_BEGIN("RSI Crossover Alert");
+SetChartOptions(0,0,chartGrid30|chartGrid70);
+_N(Title = StrFormat("{{NAME}} - {{INTERVAL}} {{DATE}} Open %g, Hi %g, Lo %g, Close %g (%.1f%%) {{VALUES}}", O, H, L, C, SelectedValue( ROC( C, 1 ) ) ));
+SetBarsRequired ( sbrAll, sbrAll);
+periods = Param( "Periods", 15, 1, 200, 1 );
+RS= RSI( periods);
+Plot( RS, _DEFAULT_NAME(), colorred, ParamStyle("Style")  );
+
+Plot (30, "Oversold", colorGreen,stylethick);
+Plot (70, "Overbought", colorRed,stylethick);
+
+buy = Cross(30,RS);
+sell = Cross(RS,70);
+
+
+shape = Buy * shapehollowsmallcircle + Sell * shapehollowsmallcircle;
+
+PlotShapes( shape, IIf( Buy, colorGreen, colorRed ), 0, RS );
+
+AlertIF( Buy, "SOUND C:\\Windows\\Media\\Ding.wav", "Audio alert", 1 );
+AlertIF( Sell, "SOUND C:\\Windows\\Media\\Ding.wav", "Audio alert", 2 );
+
+ShoonyaFireSignal(Buy,Sell,0,0);
+
+_SECTION_END();

@@ -1,0 +1,93 @@
+_SECTION_BEGIN("Shoonya Systematic Trading");
+
+stg      = ParamStr("Strategy Name","Systematic Trading");
+flag     = ParamList("STATE","STOP|START");
+lasttime = StrFormat("%0.f",LastValue(BarIndex()));
+exch     = ParamList("Exchange","NSE|NFO|BSE|CDS");
+tsym     = ParamStr("TradingSymbol","XYZ-EQ"); 
+qty      = Param("Quantity",1,1,1000,1);
+prd      = ParamList("Product","I|C|M");
+
+uniq_name = Name()+GetChartID()+interval(2)+stg;
+
+function  ShoonyaFireSignal(aiBuy,aiSell,aiShort,aiCover)
+{
+    SignalBuy   = LastValue(Ref(aiBuy,-1));//we need to ignore last candle
+    SignalSell  = LastValue(Ref(aiSell,-1));
+    SignalShort = LastValue(Ref(aiShort,-1));
+    SignalCover = LastValue(Ref(aiCover,-1));
+
+    lasttime = StrFormat("%0.f",LastValue(BarIndex()));
+    current  = StaticVarGetText(uniq_name+"_current_position");  
+    lasteval = StaticVarGetText(uniq_name+"_lasteval");     
+    
+    if(flag == "START" && lasteval != lasttime)
+    {
+        _TRACE("Eval candle num :" + lasttime);
+        
+        if(current == "")
+        {
+            current = "None";           
+        }       
+        //set the eval time    
+        StaticVarSetText(uniq_name+"_lasteval", lasttime);  
+        
+        prc = NumToStr(LastValue(Ref(Close,-1)), 8.2, False);
+        //check for buy signal
+        if(current == "None" && SignalBuy==True)
+        {           
+            trgprc = "0";
+            dscqty = "0";
+            trantype = "B";
+            prctyp = "LMT";
+            ret = "DAY";
+            remarks = uniq_name;
+                
+            NorenPlaceOrder(exch, tsym, NumToStr(qty), prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);                    
+            StaticVarSetText(uniq_name+"_current_position", "Buy");  
+            _TRACE("Enter Buy :" + lasttime);
+        }
+        else if(current == "Buy" && SignalSell==True)
+        {
+            trgprc = "0";
+            dscqty = "0";
+            trantype = "S";
+            prctyp = "LMT";
+            ret = "DAY";
+            remarks = uniq_name;
+                
+            NorenPlaceOrder(exch, tsym, NumToStr(qty), prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);                    
+            StaticVarSetText(uniq_name+"_current_position", "None");  
+            _TRACE("Exit Buy : " + lasttime);
+        }            
+        else if(current == "None" && SignalShort==True )
+        {
+            trgprc = "0";
+            dscqty = "0";
+            trantype = "S";
+            prctyp = "LMT";
+            ret = "DAY";
+            remarks = uniq_name;
+                
+            NorenPlaceOrder(exch, tsym, NumToStr(qty), prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);                    
+            StaticVarSetText(uniq_name+"_current_position", "Short");  
+            _TRACE("Short : " + lasttime);
+        }
+        else if(current == "Short" && SignalCover==True )
+        {
+            trgprc = "0";
+            dscqty = "0";
+            trantype = "B";
+            prctyp = "LMT";
+            ret = "DAY";
+            remarks = uniq_name;
+                
+            NorenPlaceOrder(exch, tsym, NumToStr(qty), prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);                    
+            StaticVarSetText(uniq_name+"_current_position", "None");  
+            _TRACE("Cover : " + lasttime);
+        }  
+    }
+}
+            
+_SECTION_END();
+
