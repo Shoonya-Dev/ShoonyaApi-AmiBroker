@@ -10,7 +10,7 @@
 1. Copy the ShoonyaAPI.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
 
-===============================================================================
+==========================================================================
 ## First Login:
 Enter Login Credentials provided in the Credentials window. 
 NorenAmicache.dat is created on successful login and restarting Amibroker will read credentials from the same.
@@ -33,7 +33,7 @@ prd      = ParamList("Product","I|C|M");
 
 The following method collects the signals for each data record as per your AFL and evaluates the last record for an order signal. Example RSI_Crossover.afl
 #### ShoonyaFireSignal(Buy,Sell,Short,Cover);
-===============================================================================
+==========================================================================
 # Place Order:
 In your afl (or ShoonyaAPI.afl ) call the method when you want to send the signal to Shoonya
 
@@ -44,7 +44,7 @@ DONOT call this function directly in your AFL without a signal guard. This may r
 Logs:
 AMIAPI_RequestLog.txt is created in Amibroker directory. Check the same for confirmations. 
 
-===============================================================================
+==========================================================================
 Note: 
 Amibroker runs the AFL code a couple of times every second for entire dataset. Make sure to build in checks to fire at the correct signal. 
 An example of this is provided ShoonyaAPI.afl
