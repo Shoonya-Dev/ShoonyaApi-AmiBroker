@@ -54,15 +54,17 @@ An example of this is provided ShoonyaAPI.afl
 ## Example Buy Limit Order
 ````
 exch = "NSE";
-tsym = "ACC-EQ";
+tsym = "CANBK-EQ";
 qty = "1";
-prc = Close;
+prc = "150";
 trgprc = "0";
 dscqty = "0";
+prd     = "I";
 trantype = "B";
 prctyp = "LMT";
 ret = "DAY";
 remarks = "1234";
+
 NorenPlaceOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);       
 ````
 ## Example Sell Limit Order
@@ -71,9 +73,10 @@ NorenPlaceOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret
 exch = "NSE";
 tsym = "ACC-EQ";
 qty = "1";
-prc = Close;
+prc = "180";
 trgprc = "0";
 dscqty = "0";
+prd     = "I";
 trantype = "S";
 prctyp = "LMT";
 ret = "DAY";
@@ -89,6 +92,7 @@ qty = "1";
 prc = 0;
 trgprc = "0";
 dscqty = "0";
+prd     = "I";
 trantype = "B";
 prctyp = "MKT";
 ret = "DAY";
@@ -103,9 +107,45 @@ qty = "1";
 prc = Close;
 trgprc = "100.5";
 dscqty = "0";
+prd     = "I";
 trantype = "B";
 prctyp = "SL-LMT";
 ret = "DAY";
 remarks = "1234";
 NorenPlaceOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);       
+````
+## Example Cover Order
+````
+exch = "NSE";
+tsym = "CANBK-EQ";
+qty = "1";
+prc = "155";
+trgprc = "0";
+dscqty = "0";
+prd     = "I";
+trantype = "B";
+prctyp = "LMT";
+ret = "DAY";
+remarks = "1234";
+blprc  = "150.5";
+
+NorenPlaceCoverOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks, blprc);       
+````
+## Example Bracket Order
+````
+exch = "NSE";
+tsym = "CANBK-EQ";
+qty = "1";
+prc = "155";
+trgprc = "0";
+dscqty = "0";
+prd     = "I";
+trantype = "B";
+prctyp = "LMT";
+ret = "DAY";
+remarks = "1234";
+blprc  = "150.5";
+bpprc  = "158";
+
+NorenPlaceBracketOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks, blprc, bpprc);       
 ````
