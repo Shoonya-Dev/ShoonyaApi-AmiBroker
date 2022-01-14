@@ -4,12 +4,13 @@
 
 1. Copy the ShoonyaAPI_x64.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
+3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x64.exe
 
 ## Instructions ( for 32 bit Amibroker): 
 
 1. Copy the ShoonyaAPI.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
-
+3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x86.exe
 ****
 ## First Login:
 Enter Login Credentials provided in the Credentials window. 
