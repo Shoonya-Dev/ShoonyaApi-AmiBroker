@@ -1,4 +1,4 @@
-# ShoonyaApi-Amibroker
+# Shoonya API-Amibroker
 
 ## Instructions ( for 64 bit Amibroker): 
 
@@ -27,10 +27,10 @@ Setup the Parameters of the AFL below
 stg      = ParamStr("Strategy Name","Systematic Trading");
 flag     = ParamList("STATE","STOP|START");
 lasttime = StrFormat("%0.f",LastValue(BarIndex()));
-exch     = ParamList("Exchange","NSE|NFO|BSE|CDS");
-tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we donot pickup symbol being plotted.
+exch     = ParamList("Exchange","NSE|NFO|CDS |BSE |MCX");
+tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we do not pickup symbol being plotted.
 qty      = Param("Quantity",1,1,1000,1);
-prd      = ParamList("Product","I|C|M");
+prd      = ParamList("Product","I|C|M|B|H") "I" FOR MIS, "C" For CNC, "M" FOR NRML,"B" FOR BRACKET ORDER, "H" FOR COVER ORDER;
 ````
 The following method collects the signals for each data record as per your AFL and evaluates the last record for an order signal. Example RSI_Crossover.afl
 #### ShoonyaFireSignal(Buy,Sell,Short,Cover);
@@ -150,3 +150,28 @@ bpprc  = "158";
 
 NorenPlaceBracketOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks, blprc, bpprc);       
 ````
+
+## Symbol Master :- Check the Symbol Format from Below mention Symbol Master urls
+
+NSE - Capital Market
+https://shoonya.finvasia.com/NSE_symbols.txt.zip
+
+NSE - Equity Derivatives
+https://shoonya.finvasia.com/NFO_symbols.txt.zip
+
+NSE - Currency Derivatives
+https://shoonya.finvasia.com/CDS_symbols.txt.zip
+
+MCX - Commodity
+https://shoonya.finvasia.com/MCX_symbols.txt.zip
+
+BSE - Capital Market
+https://shoonya.finvasia.com/BSE_symbols.txt.zip
+
+
+## Contact us
+
+For any queries, feel free to reach us , email at apisupport@finvasia.in or call at 0172-4740000 & also Just visit our website there is a Live chat option.
+
+
+
