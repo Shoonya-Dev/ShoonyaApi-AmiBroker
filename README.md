@@ -1,20 +1,28 @@
-# Shoonya API-Amibroker
+# Shoonya API-AMI Broker
 
 ## Instructions ( for 64 bit Amibroker): 
 
 1. Copy the ShoonyaAPI_x64.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
 3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x64.exe
+4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
+5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
 
 ## Instructions ( for 32 bit Amibroker): 
 
 1. Copy the ShoonyaAPI.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
 3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x86.exe
+4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
+5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
 ****
 ## First Login:
 Enter Login Credentials provided in the Credentials window. 
 NorenAmicache.dat is created on successful login and restarting Amibroker will read credentials from the same.
+
+## User Video Guide of Integration:- 
+
+https://www.youtube.com/watch?v=TXApp6GUDSQ&t=248s
 
 ## AFL strategy:
 One of most important aspects of AFL is that it is an array processing language. It operates on arrays (or rows/vectors) of data. 
@@ -30,7 +38,7 @@ lasttime = StrFormat("%0.f",LastValue(BarIndex()));
 exch     = ParamList("Exchange","NSE|NFO|CDS |BSE |MCX");
 tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we do not pickup symbol being plotted.
 qty      = Param("Quantity",1,1,1000,1);
-prd      = ParamList("Product","I|C|M|B|H") "I" FOR MIS, "C" For CNC, "M" FOR NRML,"B" FOR BRACKET ORDER, "H" FOR COVER ORDER;
+prd      = ParamList("Product","I|C|M|B|H") "I" For MIS, "C" For CNC, "M" For NRML,"B" For BRACKET ORDER, "H" For COVER ORDER;
 ````
 The following method collects the signals for each data record as per your AFL and evaluates the last record for an order signal. Example RSI_Crossover.afl
 #### ShoonyaFireSignal(Buy,Sell,Short,Cover);
