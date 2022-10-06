@@ -1,20 +1,28 @@
-# ShoonyaApi-Amibroker
+# Shoonya API-AMI Broker
 
 ## Instructions ( for 64 bit Amibroker): 
 
 1. Copy the ShoonyaAPI_x64.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
 3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x64.exe
+4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
+5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
 
 ## Instructions ( for 32 bit Amibroker): 
 
 1. Copy the ShoonyaAPI.dll to Amibroker/Plugins folder
 2. Copy cpprest141_2_10.dll to Amibroker folder
 3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x86.exe
+4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
+5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
 ****
 ## First Login:
 Enter Login Credentials provided in the Credentials window. 
 NorenAmicache.dat is created on successful login and restarting Amibroker will read credentials from the same.
+
+## User Video Guide of Integration:- 
+
+https://www.youtube.com/watch?v=TXApp6GUDSQ&t=248s
 
 ## AFL strategy:
 One of most important aspects of AFL is that it is an array processing language. It operates on arrays (or rows/vectors) of data. 
@@ -27,10 +35,10 @@ Setup the Parameters of the AFL below
 stg      = ParamStr("Strategy Name","Systematic Trading");
 flag     = ParamList("STATE","STOP|START");
 lasttime = StrFormat("%0.f",LastValue(BarIndex()));
-exch     = ParamList("Exchange","NSE|NFO|BSE|CDS");
-tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we donot pickup symbol being plotted.
+exch     = ParamList("Exchange","NSE|NFO|CDS |BSE |MCX");
+tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we do not pickup symbol being plotted.
 qty      = Param("Quantity",1,1,1000,1);
-prd      = ParamList("Product","I|C|M");
+prd      = ParamList("Product","I|C|M|B|H") "I" For MIS, "C" For CNC, "M" For NRML,"B" For BRACKET ORDER, "H" For COVER ORDER;
 ````
 The following method collects the signals for each data record as per your AFL and evaluates the last record for an order signal. Example RSI_Crossover.afl
 #### ShoonyaFireSignal(Buy,Sell,Short,Cover);
@@ -150,3 +158,28 @@ bpprc  = "158";
 
 NorenPlaceBracketOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks, blprc, bpprc);       
 ````
+
+## Symbol Master :- Check the Symbol Format from Below mention Symbol Master urls
+
+NSE - Capital Market
+https://shoonya.finvasia.com/NSE_symbols.txt.zip
+
+NSE - Equity Derivatives
+https://shoonya.finvasia.com/NFO_symbols.txt.zip
+
+NSE - Currency Derivatives
+https://shoonya.finvasia.com/CDS_symbols.txt.zip
+
+MCX - Commodity
+https://shoonya.finvasia.com/MCX_symbols.txt.zip
+
+BSE - Capital Market
+https://shoonya.finvasia.com/BSE_symbols.txt.zip
+
+
+## Contact us
+
+For any queries, feel free to reach us , email at apisupport@finvasia.in or call at 0172-4740000 & also Just visit our website there is a Live chat option.
+
+
+
