@@ -179,7 +179,7 @@ https://shoonya.finvasia.com/BSE_symbols.txt.zip
 
 ## Contact us
 
-For any queries, feel free to reach us , email at apisupport@finvasia.in or call at 0172-4740000 & also Just visit our website there is a Live chat option.
+For any queries, feel free to reach us , email at apisupport@shoonya.com or call at 0172-4740000 & also Just visit our website there is a Live chat option.
 
 
 
