@@ -98,7 +98,7 @@ NorenPlaceOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret
 exch = "NSE";
 tsym = "ACC-EQ";
 qty = "1";
-prc = 0;
+prc = "0";
 trgprc = "0";
 dscqty = "0";
 prd     = "I";
