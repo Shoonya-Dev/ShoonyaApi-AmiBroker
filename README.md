@@ -1,23 +1,23 @@
 # Shoonya API-AMI Broker
 
-## Instructions ( for 64 bit Amibroker): 
+## Instructions ( for 64-bit Amibroker): 
 
-1. Copy the ShoonyaAPI_x64.dll to Amibroker/Plugins folder
-2. Copy cpprest141_2_10.dll to Amibroker folder
-3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x64.exe
-4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
-5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
+1. Copy the ShoonyaAPI_x64.dll to the Amibroker/Plugins folder
+2. Copy cpprest141_2_10.dll to the Amibroker folder
+3. Install  Visual Studio redistributable from https://aka.ms/vs/17/release/vc_redist.x64.exe
+4. If you are running a 32-bit AMI Broker in a 64-bit operating system then you have to install Microsoft Visual Studio redistributable 32-bit.
+5. No Market Data Feeds You will be provided, You Need to Contact Another Data provider Vendor.
 
-## Instructions ( for 32 bit Amibroker): 
+## Instructions ( for 32-bit Amibroker): 
 
-1. Copy the ShoonyaAPI.dll to Amibroker/Plugins folder
-2. Copy cpprest141_2_10.dll to Amibroker folder
-3. Install  visual studio redistributable from https://aka.ms/vs/17/release/vc_redist.x86.exe
-4. If you are running 32 bit AMI Broker in 64 bit operating system then you have to install Microsoft visual studio redistributable 32 bit.
-5. No Market Data Feeds You will be provided, You Need to Contact with Another Data provider Vendor.
+1. Copy the ShoonyaAPI.dll to the Amibroker/Plugins folder
+2. Copy cpprest141_2_10.dll to the Amibroker folder
+3. Install  Visual Studio redistributable from https://aka.ms/vs/17/release/vc_redist.x86.exe
+4. If you are running a 32-bit AMI Broker in a 64-bit operating system then you have to install Microsoft Visual Studio redistributable 32-bit.
+5. No Market Data Feeds You will be provided, You Need to Contact Another Data provider Vendor.
 ****
 ## First Login:
-Enter Login Credentials provided in the Credentials window. 
+Enter the Login Credentials provided in the Credentials window. 
 NorenAmicache.dat is created on successful login and restarting Amibroker will read credentials from the same.
 
 ## User Video Guide of Integration:- 
@@ -25,8 +25,8 @@ NorenAmicache.dat is created on successful login and restarting Amibroker will r
 https://www.youtube.com/watch?v=TXApp6GUDSQ&t=248s
 
 ## AFL strategy:
-One of most important aspects of AFL is that it is an array processing language. It operates on arrays (or rows/vectors) of data. 
-As such you will need to build guards into your AFL so as not signal for the same data repeatedly.
+One of the most important aspects of AFL is that it is an array processing language. It operates on arrays (or rows/vectors) of data. 
+As such you will need to build guards into your AFL so as not to signal for the same data repeatedly.
 Read More here.https://www.amibroker.com/guide/h_understandafl.html
 
 ShoonyAPI.afl provides a basic framework for Entry and Exit Signals on the last candle. 
@@ -36,9 +36,9 @@ stg      = ParamStr("Strategy Name","Systematic Trading");
 flag     = ParamList("STATE","STOP|START");
 lasttime = StrFormat("%0.f",LastValue(BarIndex()));
 exch     = ParamList("Exchange","NSE|NFO|CDS |BSE |MCX");
-tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we do not pickup symbol being plotted.
+tsym     = ParamStr("TradingSymbol","XYZ-EQ");    <=Note set this up correctly for each symbol, we do not pick up the symbol being plotted.
 qty      = Param("Quantity",1,1,1000,1);
-prd      = ParamList("Product","I|C|M|B|H") "I" For MIS, "C" For CNC, "M" For NRML,"B" For BRACKET ORDER, "H" For COVER ORDER;
+prd      = ParamList("Product", "I|C|M|B|H") "I" For MIS, "C" For CNC, "M" For NRML, "B" For BRACKET ORDER, "H" For COVER ORDER;
 ````
 The following method collects the signals for each data record as per your AFL and evaluates the last record for an order signal. Example RSI_Crossover.afl
 #### ShoonyaFireSignal(Buy,Sell,Short,Cover);
@@ -49,15 +49,15 @@ In your afl (or ShoonyaAPI.afl ) call the method when you want to send the signa
 
 ##NorenPlaceOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks);       
 
-DONOT call this function directly in your AFL without a signal guard. This may result in multiple 
+DO NOT call this function directly in your AFL without a signal guard. This may result in multiple 
 
 Logs:
-AMIAPI_RequestLog.txt is created in Amibroker directory. Check the same for confirmations. 
+AMIAPI_RequestLog.txt is created in the Amibroker directory. Check the same for confirmation. 
 
 ****
 Note: 
 Amibroker runs the AFL code a couple of times every second for entire dataset. Make sure to build in checks to fire at the correct signal. 
-An example of this is provided ShoonyaAPI.afl
+An example of this is provided by ShoonyaAPI.afl
 
 ****
 ## Example Buy Limit Order
@@ -159,22 +159,22 @@ bpprc  = "158";
 NorenPlaceBracketOrder(exch, tsym, qty, prc, trgprc, dscqty, prd, trantype, prctyp, ret, remarks, blprc, bpprc);       
 ````
 
-## Symbol Master :- Check the Symbol Format from Below mention Symbol Master urls
+## Symbol Master:- Check the Symbol Format from Below mention Symbol Master urls
 
 NSE - Capital Market
-https://shoonya.finvasia.com/NSE_symbols.txt.zip
+https://api.shoonya.com/NSE_symbols.txt.zip
 
 NSE - Equity Derivatives
-https://shoonya.finvasia.com/NFO_symbols.txt.zip
+https://api.shoonya.com/NFO_symbols.txt.zip
 
 NSE - Currency Derivatives
-https://shoonya.finvasia.com/CDS_symbols.txt.zip
+https://api.shoonya.com/CDS_symbols.txt.zip
 
 MCX - Commodity
-https://shoonya.finvasia.com/MCX_symbols.txt.zip
+https://api.shoonya.com/MCX_symbols.txt.zip
 
 BSE - Capital Market
-https://shoonya.finvasia.com/BSE_symbols.txt.zip
+https://api.shoonya.com/BSE_symbols.txt.zip
 
 
 ## Contact us
